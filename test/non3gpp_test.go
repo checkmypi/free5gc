@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"testing"
 	"time"
+	"os"
 
 	"test/consumerTestdata/UDM/TestGenAuthData"
 	"test/nasTestpacket"
@@ -33,8 +34,8 @@ import (
 )
 
 var (
-	n3iwfInfo_IPSecIfaceAddr     = "192.168.127.1"
-	n3ueInfo_IPSecIfaceAddr      = "192.168.127.2"
+	n3iwfInfo_IPSecIfaceAddr     = os.Getenv("N3IWF_IP")
+	n3ueInfo_IPSecIfaceAddr      = os.Getenv("OWN_IP")
 	n3ueInfo_SmPolicy_SNSSAI_SST = "1"
 	n3ueInfo_SmPolicy_SNSSAI_SD  = "fedcba"
 	n3ueInfo_IPSecIfaceName      = "veth3"
@@ -904,6 +905,9 @@ func sendPduSessionEstablishmentRequest(
 
 func TestNon3GPPUE(t *testing.T) {
 	// New UE
+	t.Logf("N3IWF_IP: %s", n3iwfInfo_IPSecIfaceAddr)
+	t.Logf("OWN_IP: %s", n3ueInfo_IPSecIfaceAddr)
+
 	ue := NewRanUeContext("imsi-2089300007487", 1, security.AlgCiphering128NEA0, security.AlgIntegrity128NIA2,
 		models.AccessType_NON_3_GPP_ACCESS)
 	ue.AmfUeNgapId = 1
