@@ -1,0 +1,12 @@
+diff --git a/internal/logger/logger.go b/internal/logger/logger.go
+index 14f3cbc..9187345 100644
+--- a/internal/logger/logger.go
++++ b/internal/logger/logger.go
+@@ -30,6 +30,7 @@ func init() {
+ 	}
+ 
+ 	Log = logger_util.New(fieldsOrder)
++	Log.SetLevel(logrus.TraceLevel)
+ 	NfLog = Log.WithField(logger_util.FieldNF, "N3IWF")
+ 	MainLog = NfLog.WithField(logger_util.FieldCategory, "Main")
+ 	InitLog = NfLog.WithField(logger_util.FieldCategory, "Init")
